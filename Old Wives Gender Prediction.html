@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Wives' Tale Gender Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+		background: linear-gradient(to right, #89cff0 50%, #f4b7da 50%);
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+		//background: linear-gradient(to right, #f4b7da 50%, #89cff0 50%);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>A Little Boy or a Little Girl?</h1>
+    <form id="genderForm">
+        <label>Do you have morning sickness?
+            <input type="radio" name="morningSickness" value="yes"> Yes
+            <input type="radio" name="morningSickness" value="no"> No
+        </label>
+        <br>
+        <label>Is the baby's heartbeat more or less than 140 bpm?
+            <input type="radio" name="heartbeat" value="less"> Less
+            <input type="radio" name="heartbeat" value="more"> More
+        </label>
+        <br>
+        <label>Are you carrying high or low?
+            <input type="radio" name="carrying" value="high"> High
+            <input type="radio" name="carrying" value="low"> Low
+        </label>
+        <br>
+        <label>Are your cravings sweet or salty?
+            <input type="radio" name="craving" value="sweet"> Sweet
+            <input type="radio" name="craving" value="salty"> Salty
+        </label>
+        <br>
+        <label>Mom's emotions?
+            <input type="radio" name="emotions" value="moody"> Moody
+            <input type="radio" name="emotions" value="happy"> Happy
+        </label>
+        <br>
+        <label>Headaches?
+            <input type="radio" name="headaches" value="no"> No
+            <input type="radio" name="headaches" value="yes"> Yes
+        </label>
+        <br>
+        <label>Heartburn?
+            <input type="radio" name="heartburn" value="yes"> Yes
+            <input type="radio" name="heartburn" value="no"> No
+        </label>
+        <br>
+        <label>What side is mom sleeping on?
+            <input type="radio" name="sleepingSide" value="right"> Right
+            <input type="radio" name="sleepingSide" value="left"> Left
+        </label>
+        <br>
+        <label>Belly shape?
+            <input type="radio" name="bellyShape" value="wide"> Wide
+            <input type="radio" name="bellyShape" value="round"> Round
+        </label>
+        <br>
+        <label>Dreams?
+            <input type="radio" name="dreams" value="girl"> Girl
+            <input type="radio" name="dreams" value="boy"> Boy
+        </label>
+        <br>
+        <label>Dad's Weight?
+            <input type="radio" name="dadWeight" value="gain"> Gain
+            <input type="radio" name="dadWeight" value="maintain"> Maintain
+        </label>
+        <br>
+        <label>Mom's skin?
+            <input type="radio" name="momSkin" value="breakouts"> Breakouts
+            <input type="radio" name="momSkin" value="clear"> Clear
+        </label>
+        <br>
+        <label>Balance?
+            <input type="radio" name="balance" value="graceful"> Graceful
+            <input type="radio" name="balance" value="clumsy"> Clumsy
+        </label>
+        <br>
+        <label>Mom's Intuition (Just for fun!)?
+            <input type="radio" name="momIntuition" value="girl"> Girl
+            <input type="radio" name="momIntuition" value="boy"> Boy
+        </label>
+        <br>
+        <label>Dad's Intuition (Just for fun)?
+            <input type="radio" name="dadIntuition" value="girl"> Girl
+            <input type="radio" name="dadIntuition" value="boy"> Boy
+        </label>
+        <br>
+        <input type="button" value="Predict Gender" onclick="predictGender()">
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        function predictGender() {
+            // Gather all the selected values from the form
+            var form = document.getElementById("genderForm");
+            var inputs = form.elements;
+
+            var score = 0;
+
+            // Assign points based on selected values
+            score += inputs["morningSickness"].value === "yes" ? 1 : 0;
+            score += inputs["heartbeat"].value === "more" ? 1 : 0;
+            score += inputs["carrying"].value === "high" ? 1 : 0;
+            score += inputs["craving"].value === "sweet" ? 1 : 0;
+            score += inputs["emotions"].value === "happy" ? 1 : 0;
+            score += inputs["headaches"].value === "no" ? 1 : 0;
+            score += inputs["heartburn"].value === "no" ? 1 : 0;
+            score += inputs["sleepingSide"].value === "left" ? 1 : 0;
+            score += inputs["bellyShape"].value === "round" ? 1 : 0;
+            score += inputs["dreams"].value === "girl" ? 1 : 0;
+            score += inputs["dadWeight"].value === "gain" ? 1 : 0;
+            score += inputs["momSkin"].value === "clear" ? 1 : 0;
+            score += inputs["balance"].value === "graceful" ? 1 : 0;
+            score += inputs["momIntuition"].value === "sweet" ? 1 : 0;
+            score += inputs["dadIntuition"].value === "salty" ? 1 : 0;
+
+            // Determine gender prediction based on score
+            var prediction = score >= 8 ? "It's a little girl" : "It's a little boy!";
+            
+            // Display the result
+            var resultElement = document.getElementById("result");
+            resultElement.textContent = prediction;
+        }
+    </script>
+</body>
+</html>
